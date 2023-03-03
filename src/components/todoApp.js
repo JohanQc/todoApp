@@ -11,6 +11,7 @@ export default function TodoApp() {
     const value = event.target.value;
     setTitle(value);
   }
+  console.log(title);
 
   function hadleSubmit(e) {
     e.preventDefault();
@@ -28,7 +29,11 @@ export default function TodoApp() {
       alert("please, enter task's name")
       return
     }
-    setTodos([ newTodo, ...todos]);
+
+const newList = [newTodo, ...todos]
+
+    localStorage.setItem("todos", JSON.stringify( newList))
+    setTodos(newList);
 
     setTitle("")
   }
@@ -45,6 +50,10 @@ export default function TodoApp() {
 
     setTodos (temp)
   }
+
+
+  const todosList = JSON.parse( localStorage.getItem("todos")) ?? []
+  console.log(todosList);
 
   return (
     <div className="todoContainer">
